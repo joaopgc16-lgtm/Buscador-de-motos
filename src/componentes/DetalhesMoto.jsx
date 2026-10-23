@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-
-const API = 'http://localhost:3000'
+import { API } from '../api'
 
 function DetalhesMoto() {
   const [searchParams] = useSearchParams();

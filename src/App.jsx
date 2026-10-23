@@ -1,3 +1,5 @@
+import { API } from './api'
+
 import { useState,} from 'react'
 import { useOutletContext } from 'react-router-dom'
 import Busca from './componentes/Busca'
@@ -13,7 +15,7 @@ function App() {
     setErro(null)
     setCarregando(true)
     try{
-      const moto = await fetch(`http://localhost:3000/?motosearch=${busca}`)
+      const moto = await fetch(`${API}/?motosearch=${busca}`)
       if (!moto.ok) throw new Error("Query parameters execution failed.");
       const results = await moto.json()
       setMotos(results.resultado)
