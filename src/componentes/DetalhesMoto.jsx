@@ -53,7 +53,7 @@ function DetalhesMoto() {
                 <img
                   src={moto.imagem}
                   alt={moto.nome}
-                  className="w-full max-h-96 object-contain bg-white"
+                  className="w-full max-h-96 object-cover bg-white"
                 />
               ) : (
                 <div className="w-full h-64 bg-gray-800 flex items-center justify-center text-gray-600 text-sm">

@@ -1,4 +1,4 @@
-function Busca({setBusca, buscarMoto, busca, nome, setNome, marca, setMarca, imagem, setImagem}){
+function Busca({setBusca, buscarMoto, busca,}){
     return(
          <div>
 

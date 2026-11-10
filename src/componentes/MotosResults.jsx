@@ -19,7 +19,7 @@ function MotosResults({motos}){
                 <img
                   src={moto.imagem}
                   alt={moto.nome}
-                  className="w-full h-44 object-contain bg-white"
+                  className="w-full h-44 object-cover bg-white"
                   onClick={() => onSeeDetailsClick(moto)}
                 />
               )}
