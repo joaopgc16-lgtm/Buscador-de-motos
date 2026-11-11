@@ -57,7 +57,7 @@ async function login() {
     setCarregando(true)
     setMotos([])
     try{
-      const moto = await fetch(`${API}?motosearch=${busca}`)
+      const moto = await fetch(`${API}/buscar?motosearch=${busca}`)
       if (!moto.ok) throw new Error("Query parameters execution failed.");
       const results = await moto.json()
       setMotos(results.resultado)
