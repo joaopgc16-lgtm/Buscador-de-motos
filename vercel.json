@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/api:path*", "destination": "https://moto-server-d9rz.onrender.com/:path*" },
+    { "source": "/api/:path*", "destination": "https://moto-server-d9rz.onrender.com/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
