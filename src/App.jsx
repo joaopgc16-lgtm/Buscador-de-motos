@@ -19,7 +19,7 @@ function App() {
   setErro(null)
   setCarregando(true)
   try {
-    const resposta = await fetch(`${API}Jcadastro`, {
+    const resposta = await fetch(`${API}cadastro`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ usuario, senha, email })
