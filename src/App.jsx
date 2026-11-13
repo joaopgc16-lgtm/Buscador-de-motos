@@ -19,7 +19,7 @@ function App() {
   setErro(null)
   setCarregando(true)
   try {
-    const resposta = await fetch(`${API}cadastro`, {
+    const resposta = await fetch(`${API}/cadastro`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ usuario, senha, email })
@@ -37,7 +37,7 @@ async function login() {
   setErro(null)
   setCarregando(true)
   try {
-    const resposta = await fetch(`${API}login`, {
+    const resposta = await fetch(`${API}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ usuario, senha })
