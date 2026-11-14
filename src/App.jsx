@@ -4,6 +4,7 @@ import { useState,} from 'react'
 import { useOutletContext } from 'react-router-dom'
 import Busca from './componentes/Busca'
 import MotosResults from './componentes/MotosResults'
+import ModalAviso from './componentes/ModalAviso'
 
 function App() {
  const {busca, setBusca, motos, setMotos} = useOutletContext()
@@ -14,6 +15,8 @@ function App() {
   const [senha, setSenha] = useState('');
   const [cadastrar, setCadastrar] = useState(false);
   const [email, setEmail] = useState('');
+  const [cadastroSucesso, setCadastroSucesso] = useState(null);
+  const [logado, setLogado] = useState(null);
   
   async function cadastro() {
   setErro(null)
@@ -26,6 +29,7 @@ function App() {
     })
     const dados = await resposta.json().catch(() => ({}))
     if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao cadastrar usuário.')
+      setCadastroSucesso(dados.mensagem_de_erro || dados.mensagem)
     setEntrar(false)
   } catch (e) {
     setErro(e.message)
@@ -44,6 +48,7 @@ async function login() {
     })
     const dados = await resposta.json().catch(() => ({}))
     if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao realizar login.')
+      setLogado(dados.mensagem_de_erro || dados.mensagem)
     setEntrar(false)
   } catch (e) {
     setErro(e.message)
@@ -77,11 +82,11 @@ async function login() {
      {entrar && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-gray-800 p-7 rounded-xl shadow-lg w-full max-w-md">
-
+        
             <div className="flex items-center justify-center mt-2">
               <div className="flex items-center justify-center mb-6 gap-1  rounded-full h-10 w-70 bg-gray-700">
                 <button className={`text-white font-thin px-4 py-2 rounded-full h-10 w-70 whitespace-nowrap ${cadastrar ? "bg-gray-700" : "bg-blue-500"}  `} onClick={() => setCadastrar(false)}>Entrar</button>
-                  <button className={`text-white font-stretch-50% px-4 py-2 rounded-full h-10 w-70 whitespace-nowrap ${!cadastrar ? "bg-gray-700" : "bg-blue-500"}  `} onClick={() => setCadastrar(true)}>Cadastrar-se</button>
+                  <button className={`text-white font-thin px-4 py-2 rounded-full h-10 w-70 whitespace-nowrap ${!cadastrar ? "bg-gray-700" : "bg-blue-500"}  `} onClick={() => setCadastrar(true)}>Cadastrar-se</button>
               </div>
             </div>
 
@@ -104,12 +109,25 @@ async function login() {
             </form>
             <div className="flex justify-end">
               <button onClick={() => setEntrar(false)} className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded-lg mr-2">Cancelar</button>
-              <button {...cadastrar ? { onClick: () => { cadastro(); setCadastrar(false) } } : { onClick: () => login() }} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg">Confirmar</button>
+              <button {...cadastrar ? { onClick: () => { cadastro(); } } : { onClick: () => login() }} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg">Confirmar</button>
             </div>
           </div>
         </div>
       )}
-
+      {cadastroSucesso && !logado &&(
+           <ModalAviso
+    titulo="Conta criada!"
+    mensagem={cadastroSucesso}
+    aoFechar={() => setCadastroSucesso(null)}
+  />
+      )}
+    {!cadastroSucesso && logado &&(
+        <ModalAviso
+    titulo="Bem-vindo!"
+    mensagem={logado}
+    aoFechar={() => setLogado(null)}
+  />
+      )}
       <header className="sticky top-0 z-40 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
           <span className="text-lg font-bold tracking-tight text-white">
