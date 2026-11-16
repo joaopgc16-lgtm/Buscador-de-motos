@@ -7,7 +7,7 @@ import MotosResults from './componentes/MotosResults'
 import ModalAviso from './componentes/ModalAviso'
 
 function App() {
- const {busca, setBusca, motos, setMotos} = useOutletContext()
+ const {busca, setBusca, motos, setMotos, on, setOn} = useOutletContext()
   const [erro, setErro] = useState(null);
   const [carregando, setCarregando] = useState(false);
   const [entrar, setEntrar] = useState(false);
@@ -49,6 +49,7 @@ async function login() {
     const dados = await resposta.json().catch(() => ({}))
     if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao realizar login.')
       setLogado(dados.mensagem_de_erro || dados.mensagem)
+    setOn(dados.usuario)
     setEntrar(false)
   } catch (e) {
     setErro(e.message)
@@ -89,8 +90,10 @@ async function login() {
                   <button className={`text-white font-thin px-4 py-2 rounded-full h-10 w-70 whitespace-nowrap ${!cadastrar ? "bg-gray-700" : "bg-blue-500"}  `} onClick={() => setCadastrar(true)}>Cadastrar-se</button>
               </div>
             </div>
-
-            <h2 className="text-2xl font-bold mb-4 text-white">Login</h2>
+            {cadastrar && (
+            <h2 className="text-2xl font-bold mb-4 text-white">Criar conta</h2>)}
+             {!cadastrar && (
+            <h2 className="text-2xl font-bold mb-4 text-white">Login</h2>)}
             <form>
               <div className="mb-4">
                 <label htmlFor="username" className="block text-white mb-1">Usuário</label>
