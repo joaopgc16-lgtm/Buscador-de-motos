@@ -1,7 +1,7 @@
 function Avatar({on}){
     return(
-    <div>
-    <button className='rounded-full bg-pink-800 w-10 h-10 font-extrabold'>{on.usuario.trim()[0]}</button>
+    <div className="flex align-center items-center">
+    <button className=' bg-pink-800  opacity-70 w-10 h-10 font-extrabold rounded-full text-white'><span className="font-thin">{on.usuario.trim().toUpperCase()[0]}</span></button>
     </div>
 )
 
