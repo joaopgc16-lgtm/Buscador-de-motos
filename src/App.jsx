@@ -136,7 +136,7 @@ async function login() {
   />
       )}
       <header className="sticky top-0 z-40 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-screen items-center justify-between px-80">
+        <div className="mx-auto flex h-14 max-w-5x1 xl:max-w-screen items-center justify-between px-4 xl:px-80">
           <span className="text-lg font-bold tracking-tight text-white">
             🏍️ <span className="text-red-500">Motos</span>
           </span>
