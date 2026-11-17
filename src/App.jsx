@@ -5,6 +5,7 @@ import { useOutletContext } from 'react-router-dom'
 import Busca from './componentes/Busca'
 import MotosResults from './componentes/MotosResults'
 import ModalAviso from './componentes/ModalAviso'
+import Avatar from './componentes/Avatar'
 
 function App() {
  const {busca, setBusca, motos, setMotos, on, setOn} = useOutletContext()
@@ -17,6 +18,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [cadastroSucesso, setCadastroSucesso] = useState(null);
   const [logado, setLogado] = useState(null);
+ 
   
   async function cadastro() {
   setErro(null)
@@ -44,11 +46,12 @@ async function login() {
     const resposta = await fetch(`${API}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ usuario, senha })
     })
     const dados = await resposta.json().catch(() => ({}))
     if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao realizar login.')
-      setLogado(dados.mensagem_de_erro || dados.mensagem)
+    setLogado(dados.mensagem_de_erro || dados.mensagem)
     setOn(dados.usuario)
     setEntrar(false)
   } catch (e) {
@@ -73,6 +76,7 @@ async function login() {
     } finally {
       setCarregando(false);
     }
+    
   }
 
 
@@ -80,7 +84,7 @@ async function login() {
 
     <div className="min-h-screen max-w-screen bg-linear-to-b from-gray-950 to-gray-900">
 
-     {entrar && (
+     {entrar &&(
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-gray-800 p-7 rounded-xl shadow-lg w-full max-w-md">
         
@@ -136,7 +140,10 @@ async function login() {
           <span className="text-lg font-bold tracking-tight text-white">
             🏍️ <span className="text-red-500">Motos</span>
           </span>
-
+          {on && (
+        <Avatar on={on}/>
+      )}
+        {!on && (
           <button
             type="button"
             onClick={() => setEntrar(true)}
@@ -144,8 +151,10 @@ async function login() {
           >
             Entrar
           </button>
-        </div>
+          )}
+        </div> 
       </header>
+      
         
       <div className="max-w-2xl mx-auto">
         <Busca busca={busca} setBusca={setBusca} buscarMoto={buscarMoto}/>
