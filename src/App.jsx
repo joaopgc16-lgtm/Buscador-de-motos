@@ -5,6 +5,7 @@ import { useOutletContext } from 'react-router-dom'
 import Busca from './componentes/Busca'
 import MotosResults from './componentes/MotosResults'
 import ModalLogin from './componentes/ModalLogin'
+import ModalAviso from './componentes/ModalAviso'
 
 function App() {
  const {busca, setBusca, motos, setMotos} = useOutletContext()
@@ -25,7 +26,8 @@ function App() {
     const resposta = await fetch(`${API}/cadastro`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ usuario, senha, email })
+      body: JSON.stringify({ usuario, senha, email }),
+      credentials: "include"
     })
     const dados = await resposta.json().catch(() => ({}))
     if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao cadastrar usuário.')
@@ -44,7 +46,8 @@ async function login() {
     const resposta = await fetch(`${API}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ usuario, senha })
+      body: JSON.stringify({ usuario, senha }),
+      credentials: "include"
     })
     const dados = await resposta.json().catch(() => ({}))
     if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao realizar login.')
@@ -81,6 +84,20 @@ async function login() {
 
      {entrar && (
       <ModalLogin login={login} cadastro={cadastro} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} setUsuario={setUsuario} email={email} setEmail={setEmail} senha={setSenha} setSenha={setSenha}/>
+      )}
+      {cadastroSucesso && !logado &&(
+           <ModalAviso
+    titulo="Conta criada!"
+    mensagem={cadastroSucesso}
+    aoFechar={() => setCadastroSucesso(null)}
+  />
+      )}
+    {!cadastroSucesso && logado &&(
+        <ModalAviso
+    titulo="Bem-vindo!"
+    mensagem={logado}
+    aoFechar={() => setLogado(null)}
+  />
       )}
 
       <header className="sticky top-0 z-40 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
