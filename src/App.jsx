@@ -6,9 +6,11 @@ import Busca from './componentes/Busca'
 import MotosResults from './componentes/MotosResults'
 import ModalLogin from './componentes/ModalLogin'
 import ModalAviso from './componentes/ModalAviso'
+import Avatar from './componentes/Avatar'
 
 function App() {
- const {busca, setBusca, motos, setMotos} = useOutletContext()
+
+ const {busca, setBusca, motos, setMotos, on, setOn} = useOutletContext()
   const [erro, setErro] = useState(null);
   const [carregando, setCarregando] = useState(false);
   const [entrar, setEntrar] = useState(false);
@@ -30,8 +32,8 @@ function App() {
       credentials: "include"
     })
     const dados = await resposta.json().catch(() => ({}))
-    if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao cadastrar usuário.')
     setCadastroSucesso(dados.mensagem_de_erro || dados.mensagem)
+    if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao cadastrar usuário.')
     setEntrar(false)
   } catch (e) {
     setErro(e.message)
@@ -46,12 +48,13 @@ async function login() {
     const resposta = await fetch(`${API}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ usuario, senha }),
-      credentials: "include"
+      credentials: 'include',
+      body: JSON.stringify({ usuario, senha })
     })
     const dados = await resposta.json().catch(() => ({}))
-    if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao realizar login.')
     setLogado( dados.mensagem_de_erro || dados.mensagem)
+    if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao realizar login.')
+    setOn(dados.usuario)
     setEntrar(false)
   } catch (e) {
     setErro(e.message)
@@ -83,7 +86,7 @@ async function login() {
     <div className="min-h-screen max-w-screen bg-linear-to-b from-gray-950 to-gray-900">
 
      {entrar && (
-      <ModalLogin login={login} cadastro={cadastro} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} setUsuario={setUsuario} email={email} setEmail={setEmail} senha={setSenha} setSenha={setSenha}/>
+      <ModalLogin login={login} cadastro={cadastro} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} setUsuario={setUsuario} email={email} setEmail={setEmail} senha={senha} setSenha={setSenha} setEntrar={setEntrar}/>
       )}
       {cadastroSucesso && !logado &&(
            <ModalAviso
@@ -105,7 +108,10 @@ async function login() {
           <span className="text-lg font-bold tracking-tight text-white">
             🏍️ <span className="text-red-500">Motos</span>
           </span>
-
+          {on && (
+            <Avatar on={on}/>
+          )}
+        {!on && (
           <button
             type="button"
             onClick={() => setEntrar(true)}
@@ -113,6 +119,7 @@ async function login() {
           >
             Entrar
           </button>
+        )}
         </div>
       </header>
         
