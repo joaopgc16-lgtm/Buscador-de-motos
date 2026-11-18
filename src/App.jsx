@@ -4,6 +4,7 @@ import { useState,} from 'react'
 import { useOutletContext } from 'react-router-dom'
 import Busca from './componentes/Busca'
 import MotosResults from './componentes/MotosResults'
+import ModalLogin from './componentes/ModalLogin'
 
 function App() {
  const {busca, setBusca, motos, setMotos} = useOutletContext()
@@ -75,39 +76,7 @@ async function login() {
     <div className="min-h-screen max-w-screen bg-linear-to-b from-gray-950 to-gray-900">
 
      {entrar && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-gray-800 p-7 rounded-xl shadow-lg w-full max-w-md">
-
-            <div className="flex items-center justify-center mt-2">
-              <div className="flex items-center justify-center mb-6 gap-1  rounded-full h-10 w-70 bg-gray-700">
-                <button className={`text-white font-thin px-4 py-2 rounded-full h-10 w-70 whitespace-nowrap ${cadastrar ? "bg-gray-700" : "bg-blue-500"}  `} onClick={() => setCadastrar(false)}>Entrar</button>
-                  <button className={`text-white font-stretch-50% px-4 py-2 rounded-full h-10 w-70 whitespace-nowrap ${!cadastrar ? "bg-gray-700" : "bg-blue-500"}  `} onClick={() => setCadastrar(true)}>Cadastrar-se</button>
-              </div>
-            </div>
-
-            <h2 className="text-2xl font-bold mb-4 text-white">Login</h2>
-            <form>
-              <div className="mb-4">
-                <label htmlFor="username" className="block text-white mb-1">Usuário</label>
-                <input type="text" id="username" onChange={(e) => setUsuario(e.target.value)} className="w-full px-3 py-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500" />
-              </div>
-              {cadastrar &&( 
-                  <div className="mb-4">
-                <label htmlFor='email' className="block text-white mb-1">Email</label>
-                <input type="email" id="email" onChange={(e) => setEmail(e.target.value)} className="w-full px-3 py-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500" />
-              </div>
-              )}
-              <div className="mb-4">
-                <label htmlFor="password" className="block text-white mb-1">Senha</label>
-                <input type="password" id="password" onChange={(e) => setSenha(e.target.value)} className="w-full px-3 py-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500" />
-              </div>
-            </form>
-            <div className="flex justify-end">
-              <button onClick={() => setEntrar(false)} className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded-lg mr-2">Cancelar</button>
-              <button {...cadastrar ? { onClick: () => { cadastro(); setCadastrar(false) } } : { onClick: () => login() }} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg">Confirmar</button>
-            </div>
-          </div>
-        </div>
+      <ModalLogin login={login} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} setUsuario={setUsuario} senha={setSenha} setSenha={setSenha}/>
       )}
 
       <header className="sticky top-0 z-40 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
