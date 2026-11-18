@@ -4,11 +4,9 @@ import { useState,} from 'react'
 import { useOutletContext } from 'react-router-dom'
 import Busca from './componentes/Busca'
 import MotosResults from './componentes/MotosResults'
-import ModalAviso from './componentes/ModalAviso'
-import Avatar from './componentes/Avatar'
 
 function App() {
- const {busca, setBusca, motos, setMotos, on, setOn} = useOutletContext()
+ const {busca, setBusca, motos, setMotos} = useOutletContext()
   const [erro, setErro] = useState(null);
   const [carregando, setCarregando] = useState(false);
   const [entrar, setEntrar] = useState(false);
@@ -16,9 +14,6 @@ function App() {
   const [senha, setSenha] = useState('');
   const [cadastrar, setCadastrar] = useState(false);
   const [email, setEmail] = useState('');
-  const [cadastroSucesso, setCadastroSucesso] = useState(null);
-  const [logado, setLogado] = useState(null);
- 
   
   async function cadastro() {
   setErro(null)
@@ -27,9 +22,11 @@ function App() {
     const resposta = await fetch(`${API}/cadastro`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ usuario, senha, email })
+      body: JSON.stringify({ usuario, senha, email }),
+      credentials: "include"
     })
     const dados = await resposta.json().catch(() => ({}))
+    setCadastroSucesso(dados.mensagem_de_erro || dados.mensagem)
     if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao cadastrar usuário.')
       setCadastroSucesso(dados.mensagem_de_erro || dados.mensagem)
     setEntrar(false)
@@ -50,9 +47,8 @@ async function login() {
       body: JSON.stringify({ usuario, senha })
     })
     const dados = await resposta.json().catch(() => ({}))
+    setLogado( dados.mensagem_de_erro || dados.mensagem)
     if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao realizar login.')
-    setLogado(dados.mensagem_de_erro || dados.mensagem)
-    setOn(dados.usuario)
     setEntrar(false)
   } catch (e) {
     setErro(e.message)
@@ -84,20 +80,18 @@ async function login() {
 
     <div className="min-h-screen max-w-screen bg-linear-to-b from-gray-950 to-gray-900">
 
-     {entrar &&(
+     {entrar && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-gray-800 p-7 rounded-xl shadow-lg w-full max-w-md">
-        
+
             <div className="flex items-center justify-center mt-2">
               <div className="flex items-center justify-center mb-6 gap-1  rounded-full h-10 w-70 bg-gray-700">
                 <button className={`text-white font-thin px-4 py-2 rounded-full h-10 w-70 whitespace-nowrap ${cadastrar ? "bg-gray-700" : "bg-blue-500"}  `} onClick={() => setCadastrar(false)}>Entrar</button>
-                  <button className={`text-white font-thin px-4 py-2 rounded-full h-10 w-70 whitespace-nowrap ${!cadastrar ? "bg-gray-700" : "bg-blue-500"}  `} onClick={() => setCadastrar(true)}>Cadastrar-se</button>
+                  <button className={`text-white font-stretch-50% px-4 py-2 rounded-full h-10 w-70 whitespace-nowrap ${!cadastrar ? "bg-gray-700" : "bg-blue-500"}  `} onClick={() => setCadastrar(true)}>Cadastrar-se</button>
               </div>
             </div>
-            {cadastrar && (
-            <h2 className="text-2xl font-bold mb-4 text-white">Criar conta</h2>)}
-             {!cadastrar && (
-            <h2 className="text-2xl font-bold mb-4 text-white">Login</h2>)}
+
+            <h2 className="text-2xl font-bold mb-4 text-white">Login</h2>
             <form>
               <div className="mb-4">
                 <label htmlFor="username" className="block text-white mb-1">Usuário</label>
@@ -116,7 +110,7 @@ async function login() {
             </form>
             <div className="flex justify-end">
               <button onClick={() => setEntrar(false)} className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded-lg mr-2">Cancelar</button>
-              <button {...cadastrar ? { onClick: () => { cadastro(); } } : { onClick: () => login() }} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg">Confirmar</button>
+              <button {...cadastrar ? { onClick: () => { cadastro(); setCadastrar(false) } } : { onClick: () => login() }} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg">Confirmar</button>
             </div>
           </div>
         </div>
@@ -140,10 +134,7 @@ async function login() {
           <span className="text-lg font-bold tracking-tight text-white">
             🏍️ <span className="text-red-500">Motos</span>
           </span>
-          {on && (
-        <Avatar on={on}/>
-      )}
-        {!on && (
+
           <button
             type="button"
             onClick={() => setEntrar(true)}
@@ -151,8 +142,7 @@ async function login() {
           >
             Entrar
           </button>
-          )}
-        </div> 
+        </div>
       </header>
       
         
