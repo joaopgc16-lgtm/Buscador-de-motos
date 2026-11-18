@@ -1,6 +1,6 @@
 import { Bike, X, UserRound, Mail, LockKeyhole, Eye } from "lucide-react"
 
-function ModalLogin({login, cadastro, cadastrar, setCadastrar, usuario, setUsuario, email, setEmail, senha, setSenha}){
+function ModalLogin({login, cadastro, cadastrar, setCadastrar, setUsuario, setEmail, setSenha}){
     return(
         
        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm">

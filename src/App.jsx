@@ -15,6 +15,8 @@ function App() {
   const [senha, setSenha] = useState('');
   const [cadastrar, setCadastrar] = useState(false);
   const [email, setEmail] = useState('');
+  const [cadastroSucesso, setCadastroSucesso] = useState(null)
+  const [logado, setLogado] = useState(null)
   
   async function cadastro() {
   setErro(null)
@@ -27,6 +29,7 @@ function App() {
     })
     const dados = await resposta.json().catch(() => ({}))
     if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao cadastrar usuário.')
+    setCadastroSucesso(dados.mensagem_de_erro || dados.mensagem)
     setEntrar(false)
   } catch (e) {
     setErro(e.message)
@@ -45,6 +48,7 @@ async function login() {
     })
     const dados = await resposta.json().catch(() => ({}))
     if (!resposta.ok) throw new Error(dados.mensagem_de_erro || 'Falha ao realizar login.')
+    setLogado( dados.mensagem_de_erro || dados.mensagem)
     setEntrar(false)
   } catch (e) {
     setErro(e.message)
