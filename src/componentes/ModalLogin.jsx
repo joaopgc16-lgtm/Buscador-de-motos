@@ -1,6 +1,6 @@
 import { Bike, X, UserRound, Mail, LockKeyhole, Eye } from "lucide-react"
 
-function ModalLogin({login, cadastrar, setCadastrar, usuario, setUsuario}){
+function ModalLogin({login, cadastro, cadastrar, setCadastrar, usuario, setUsuario, email, setEmail, senha, setSenha}){
     return(
         
        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
@@ -35,7 +35,7 @@ function ModalLogin({login, cadastrar, setCadastrar, usuario, setUsuario}){
             {/* Aba ativa */}
             <button
               type="button"
-              className="rounded-lg bg-[#e53e3e] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_5px_18px_rgba(229,62,62,0.25)] transition-all"
+              className={`rounded-lg ${!cadastrar ? "bg-[#e53e3e]" : null } ${cadastrar ? "hover:bg-white/[0.04]" : null} hover:text-[#f0f0f5] px-4 py-2.5 text-sm font-semibold ${!cadastrar ? "text-white" : "text-[#8a8fa8]"} ${!cadastrar ? "shadow-[0_5px_18px_rgba(229,62,62,0.25)]" : null} transition-all`}
               onClick={() => setCadastrar(false)}
             >
               Entrar
@@ -44,7 +44,7 @@ function ModalLogin({login, cadastrar, setCadastrar, usuario, setUsuario}){
             {/* Aba inativa */}
             <button
               type="button"
-              className="rounded-lg px-4 py-2.5 text-sm font-medium text-[#8a8fa8] transition-colors hover:bg-white/[0.04] hover:text-[#f0f0f5]" onClick={() => setCadastrar(true)}
+              className={`rounded-lg px-4 py-2.5 text-sm font-medium ${!cadastrar ? "text-[#8a8fa8]" : "text-[#f0f0f5]"} transition-colors ${!cadastrar ? "hover:bg-white/[0.04]": null} ${cadastrar ? "hover:text-[#f0f0f5]" : null} ${cadastrar ? "bg-[#e53e3e]" : null}`} onClick={() => setCadastrar(true)}
             >
               Criar conta
             </button>
@@ -69,6 +69,7 @@ function ModalLogin({login, cadastrar, setCadastrar, usuario, setUsuario}){
                 type="text"
                 placeholder="Como podemos chamar você?"
                 className="w-full rounded-xl border border-white/[0.07] bg-[#1e2133] py-3 pl-10 pr-4 text-sm text-[#f0f0f5] outline-none transition-all placeholder:text-[#8a8fa8]/70 hover:border-white/[0.12] focus:border-[#e53e3e]/60 focus:ring-2 focus:ring-[#e53e3e]/10"
+                onChange={(e) => setUsuario(e.target.value)}
               />
             </div>
           </div>
@@ -88,6 +89,7 @@ function ModalLogin({login, cadastrar, setCadastrar, usuario, setUsuario}){
                 type="email"
                 placeholder="voce@email.com"
                 className="w-full rounded-xl border border-white/[0.07] bg-[#1e2133] py-3 pl-10 pr-4 text-sm text-[#f0f0f5] outline-none transition-all placeholder:text-[#8a8fa8]/70 hover:border-white/[0.12] focus:border-[#e53e3e]/60 focus:ring-2 focus:ring-[#e53e3e]/10"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
@@ -117,6 +119,7 @@ function ModalLogin({login, cadastrar, setCadastrar, usuario, setUsuario}){
                 type="password"
                 placeholder="Digite sua senha"
                 className="w-full rounded-xl border border-white/[0.07] bg-[#1e2133] py-3 pl-10 pr-11 text-sm text-[#f0f0f5] outline-none transition-all placeholder:text-[#8a8fa8]/70 hover:border-white/[0.12] focus:border-[#e53e3e]/60 focus:ring-2 focus:ring-[#e53e3e]/10"
+                onChange={(e) => setSenha(e.target.value)}
               />
 
               <button
@@ -141,6 +144,7 @@ function ModalLogin({login, cadastrar, setCadastrar, usuario, setUsuario}){
             <button
               type="submit"
               className="rounded-xl bg-[#e53e3e] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(229,62,62,0.22)] transition-all hover:bg-[#ef4b4b] hover:shadow-[0_12px_35px_rgba(229,62,62,0.3)] active:scale-[0.98]"
+              onClick={cadastrar ? () => cadastro() : () => login()}
             >
               Confirmar
             </button>

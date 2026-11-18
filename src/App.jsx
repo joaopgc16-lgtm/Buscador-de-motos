@@ -76,7 +76,7 @@ async function login() {
     <div className="min-h-screen max-w-screen bg-linear-to-b from-gray-950 to-gray-900">
 
      {entrar && (
-      <ModalLogin login={login} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} setUsuario={setUsuario} senha={setSenha} setSenha={setSenha}/>
+      <ModalLogin login={login} cadastro={cadastro} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} setUsuario={setUsuario} email={email} setEmail={setEmail} senha={setSenha} setSenha={setSenha}/>
       )}
 
       <header className="sticky top-0 z-40 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
