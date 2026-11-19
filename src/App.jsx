@@ -158,17 +158,22 @@ async function logout(){
     <div className="min-h-screen max-w-screen bg-linear-to-b from-[#111127] to-[#111527]">
 
      {entrar && (
-      <ModalLogin setEntrar={setEntrar} login={login} cadastro={cadastro} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} setUsuario={setUsuario} email={email} setEmail={setEmail} senha={senha} setSenha={setSenha} setEntrar={setEntrar}/>
+      <ModalLogin setEntrar={setEntrar} 
+      login={login} cadastro={cadastro} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} 
+      setUsuario={setUsuario} email={email} setEmail={setEmail} senha={senha} 
+      setSenha={setSenha} setEntrar={setEntrar} carregando={carregando}/>
       )}
+
       {mostrarcadastro && !mostrarlogin &&(
            <ModalAviso
-    titulo={cadastrado ? "Conta criada!" : "Erro ao criar conta."}
-    conferiricone={conferircadastro}
-    cadastrado={cadastrado}
-    mensagem={mensagem}
-    aoFechar={() => setCadastrado(null)}
-  />
+            titulo={cadastrado ? "Conta criada!" : "Erro ao criar conta."}
+            conferiricone={conferircadastro}
+            cadastrado={cadastrado}
+            mensagem={mensagem}
+            aoFechar={() => setMostrarcadastro(null)}
+          />
       )}
+
     {!mostrarcadastro && mostrarlogin &&(
         <ModalAviso
     titulo={logado ? 'Sucesso' : "Erro"}

@@ -25,12 +25,14 @@ function ModalLogin({
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
     >
+       
       <div
         role="dialog"
         aria-modal="true"
         className="w-full max-w-md overflow-hidden rounded-2xl border border-white/[0.07] bg-[#161927] shadow-[0_28px_90px_rgba(0,0,0,0.58)]"
         onClick={(e) => e.stopPropagation()}
       >
+        
         {/* Cabeçalho */}
         <div className="relative border-b border-white/[0.07] px-6 pb-5 pt-6">
           <button

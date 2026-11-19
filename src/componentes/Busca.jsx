@@ -6,7 +6,7 @@ function Busca({setBusca, buscarMoto, busca,}){
           🏍️ Busca de <span className="text-red-500">Motos</span>
         </h1>
         <p className="text-center text-gray-400 mb-8">
-          Pesquise por nome e ano (ex: yzf_r6_2006)
+          Pesquise por nome e ano (ex: yzf r6 2006)
         </p>
 
         <div className="flex gap-2 mb-8">
