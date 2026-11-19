@@ -64,9 +64,10 @@ function Avatar({ on, avatar, setAvatar, logout }) {
             className="
               w-full rounded-lg px-3 py-2.5
               text-left text-sm text-[#8a8fa8]
-              transition-colors duration-150
+              transition-all duration-600
               hover:bg-[#1e2133]
               hover:text-[#f0f0f5]
+              hover:scale-101
             "
           >
             Meu perfil
@@ -77,9 +78,10 @@ function Avatar({ on, avatar, setAvatar, logout }) {
             className="
               w-full rounded-lg px-3 py-2.5
               text-left text-sm text-[#8a8fa8]
-              transition-colors duration-150
+              transition-all duration-600
               hover:bg-[#1e2133]
               hover:text-[#f0f0f5]
+              hover:scale-101
             "
           >
             Configurações
@@ -93,8 +95,8 @@ function Avatar({ on, avatar, setAvatar, logout }) {
             className="
               w-full rounded-lg px-3 py-2.5
               text-left text-sm text-[#e53e3e]
-              transition-colors duration-150
-              hover:bg-[#e53e3e]/10
+              transition-all duration-600
+              hover:bg-[#e53e3e]/10 hover:scale-101
             "
             onClick={() => logout()}
           >

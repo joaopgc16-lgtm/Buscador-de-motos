@@ -155,7 +155,7 @@ async function logout(){
 
   return (
 
-    <div className="min-h-screen max-w-screen bg-linear-to-b from-[#161927] to-[#101927]">
+    <div className="min-h-screen max-w-screen bg-linear-to-b from-[#111127] to-[#111527]">
 
      {entrar && (
       <ModalLogin setEntrar={setEntrar} login={login} cadastro={cadastro} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} setUsuario={setUsuario} email={email} setEmail={setEmail} senha={senha} setSenha={setSenha} setEntrar={setEntrar}/>
@@ -179,7 +179,7 @@ async function logout(){
   />
       )}
 
-      <header className="sticky top-0 z-40 border-b border-gray-800 bg-gray-950/80 backdrop-blur mb-5 ">
+      <header className="sticky top-0 z-40 border-b border-gray-800 bg-[#111527] backdrop-blur mb-5 ">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
           <span className="text-lg font-bold tracking-tight text-white">
             🏍️ <span className="text-red-500">Motos</span>
