@@ -1,4 +1,5 @@
-function ModalAviso({ titulo, mensagem, aoFechar }) {
+function ModalAviso({ titulo, aoFechar, logado, mensagem, conferiricone, cadastrado }) {
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4"
@@ -19,9 +20,9 @@ function ModalAviso({ titulo, mensagem, aoFechar }) {
           ✕
         </button>
 
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-500/20 text-2xl text-green-400">
-          ✓
-        </div>
+        <div>
+          {conferiricone(logado || cadastrado)}
+      </div>
 
         <h2 className="mb-2 text-xl font-bold text-white">{titulo}</h2>
         <p className="mb-6 text-gray-300">{mensagem}</p>

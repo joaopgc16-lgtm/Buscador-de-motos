@@ -9,9 +9,9 @@ const abaAtiva = 'bg-[#e53e3e] font-semibold text-white shadow-[0_5px_18px_rgba(
 const abaInativa = 'font-medium text-[#8a8fa8] hover:bg-white/[0.04] hover:text-[#f0f0f5]'
 
 function ModalLogin({
-  login, cadastro, cadastrar, setCadastrar,
+  setEntrar, login, cadastro, cadastrar, setCadastrar,
   usuario, setUsuario, email, setEmail, senha, setSenha,
-  erro, carregando, aoFechar,
+  erro, carregando,
 }) {
   const [mostrarSenha, setMostrarSenha] = useState(false)
 
@@ -24,7 +24,6 @@ function ModalLogin({
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
-      onClick={aoFechar}
     >
       <div
         role="dialog"
@@ -36,9 +35,9 @@ function ModalLogin({
         <div className="relative border-b border-white/[0.07] px-6 pb-5 pt-6">
           <button
             type="button"
-            onClick={aoFechar}
             aria-label="Fechar modal"
             className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-lg text-[#8a8fa8] transition-colors hover:bg-[#1e2133] hover:text-white"
+            onClick={() => setEntrar(false)}
           >
             <X size={17} />
           </button>
@@ -159,7 +158,7 @@ function ModalLogin({
           <div className="flex items-center justify-end gap-3 pt-2">
             <button
               type="button"
-              onClick={aoFechar}
+              onClick={() => setEntrar(false)}
               className="rounded-xl border border-white/[0.07] bg-white/[0.04] px-5 py-3 text-sm font-medium text-[#f0f0f5] transition-all hover:border-white/[0.12] hover:bg-white/[0.08] active:scale-[0.98]"
             >
               Cancelar
