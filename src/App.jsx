@@ -161,7 +161,7 @@ async function logout(){
       <ModalLogin setEntrar={setEntrar} 
       login={login} cadastro={cadastro} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} 
       setUsuario={setUsuario} email={email} setEmail={setEmail} senha={senha} 
-      setSenha={setSenha} setEntrar={setEntrar} carregando={carregando}/>
+      setSenha={setSenha} carregando={carregando}/>
       )}
 
       {mostrarcadastro && !mostrarlogin &&(
