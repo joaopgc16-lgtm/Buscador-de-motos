@@ -9,7 +9,7 @@ const abaAtiva = 'bg-[#e53e3e] font-semibold text-white shadow-[0_5px_18px_rgba(
 const abaInativa = 'font-medium text-[#8a8fa8] hover:bg-white/[0.04] hover:text-[#f0f0f5]'
 
 function ModalLogin({
-  setEntrar, login, cadastro, cadastrar, setCadastrar,
+  entrar, setEntrar, login, cadastro, cadastrar, setCadastrar,
   usuario, setUsuario, email, setEmail, senha, setSenha,
   erro, carregando,
 }) {
@@ -22,19 +22,25 @@ function ModalLogin({
   }
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
-    >
-       
-      <div
-        role="dialog"
-        aria-modal="true"
-        className="w-full max-w-md overflow-hidden rounded-2xl border border-white/[0.07] bg-[#161927] shadow-[0_28px_90px_rgba(0,0,0,0.58)]"
-        onClick={(e) => e.stopPropagation()}
-      >
-        
-        {/* Cabeçalho */}
-        <div className="relative border-b border-white/[0.07] px-6 pb-5 pt-6">
+   <div
+  onClick={() => setEntrar(false)}
+  aria-hidden={!entrar}
+  className={`fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm
+    transition-[opacity,visibility] duration-300
+    ${entrar ? 'visible opacity-100' : 'invisible opacity-0'}`}
+>
+  <div
+    role="dialog"
+    aria-modal="true"
+    onClick={(e) => e.stopPropagation()}
+    className={`w-full max-w-md overflow-hidden rounded-2xl border border-white/[0.07] bg-[#161927]
+      shadow-[0_28px_90px_rgba(0,0,0,0.58)] transition-all duration-300
+      ${entrar ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-4 scale-95 opacity-0'}`}
+  >
+
+    {/* Cabeçalho */}
+    <div className="relative border-b border-white/[0.07] px-6 pb-5 pt-6">
+      {/* ... resto igual */}
           <button
             type="button"
             aria-label="Fechar modal"

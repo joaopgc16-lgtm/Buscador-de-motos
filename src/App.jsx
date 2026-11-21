@@ -157,12 +157,12 @@ async function logout(){
 
     <div className="min-h-screen max-w-screen bg-linear-to-b from-[#111127] to-[#111527]">
 
-     {entrar && (
-      <ModalLogin setEntrar={setEntrar} 
+    
+      <ModalLogin entrar={entrar} setEntrar={setEntrar} 
       login={login} cadastro={cadastro} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} 
       setUsuario={setUsuario} email={email} setEmail={setEmail} senha={senha} 
       setSenha={setSenha} carregando={carregando}/>
-      )}
+    
 
       {mostrarcadastro && !mostrarlogin &&(
            <ModalAviso
