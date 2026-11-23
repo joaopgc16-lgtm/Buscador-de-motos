@@ -155,76 +155,73 @@ async function logout(){
 
   return (
 
-    <div className="min-h-screen max-w-screen bg-linear-to-b from-[#111127] to-[#111527]">
+    <div className="min-h-dvh bg-linear-to-b from-[#111127] to-[#111527]">
 
-    
-      <ModalLogin entrar={entrar} setEntrar={setEntrar} 
-      login={login} cadastro={cadastro} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario} 
-      setUsuario={setUsuario} email={email} setEmail={setEmail} senha={senha} 
-      setSenha={setSenha} carregando={carregando}/>
-    
+  <ModalLogin entrar={entrar} setEntrar={setEntrar}
+    login={login} cadastro={cadastro} cadastrar={cadastrar} setCadastrar={setCadastrar} usuario={usuario}
+    setUsuario={setUsuario} email={email} setEmail={setEmail} senha={senha}
+    setSenha={setSenha} carregando={carregando}/>
 
-      {mostrarcadastro && !mostrarlogin &&(
-           <ModalAviso
-            titulo={cadastrado ? "Conta criada!" : "Erro ao criar conta."}
-            conferiricone={conferircadastro}
-            cadastrado={cadastrado}
-            mensagem={mensagem}
-            aoFechar={() => setMostrarcadastro(null)}
-          />
+  {mostrarcadastro && !mostrarlogin && (
+    <ModalAviso
+      titulo={cadastrado ? "Conta criada!" : "Erro ao criar conta."}
+      conferiricone={conferircadastro}
+      cadastrado={cadastrado}
+      mensagem={mensagem}
+      aoFechar={() => setMostrarcadastro(null)}
+    />
+  )}
+
+  {!mostrarcadastro && mostrarlogin && (
+    <ModalAviso
+      titulo={logado ? 'Sucesso' : "Erro"}
+      conferiricone={conferirlogin}
+      logado={logado}
+      mensagem={mensagem}
+      aoFechar={() => setMostrarlogin(null)}
+    />
+  )}
+
+  <header className="sticky top-0 z-40 border-b border-gray-800 bg-[#111527]/80 backdrop-blur">
+    <div className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-4 sm:px-6">
+      <span className="text-lg font-bold tracking-tight text-white">
+        🏍️ <span className="text-red-500">Motos</span>
+      </span>
+
+      {on ? (
+        <Avatar on={on} avatar={avatar} setAvatar={setAvatar} logout={logout} />
+      ) : (
+        <button
+          type="button"
+          onClick={() => setEntrar(true)}
+          className="rounded-xl border border-red-600 px-4 py-2 text-sm font-semibold text-red-500 transition-colors hover:bg-red-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+        >
+          Entrar
+        </button>
       )}
-
-    {!mostrarcadastro && mostrarlogin &&(
-        <ModalAviso
-    titulo={logado ? 'Sucesso' : "Erro"}
-    conferiricone={conferirlogin}
-    logado={logado}
-    mensagem={mensagem}
-    aoFechar={() => setMostrarlogin(null)}
-  />
-      )}
-
-      <header className="sticky top-0 z-40 border-b border-gray-800 bg-[#111527] backdrop-blur mb-5 ">
-        <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
-          <span className="text-lg font-bold tracking-tight text-white">
-            🏍️ <span className="text-red-500">Motos</span>
-          </span>
-          {on && (
-            <Avatar on={on} avatar={avatar} setAvatar={setAvatar} logout={logout}/>
-          )}
-        {!on && (
-          <button
-            type="button"
-            onClick={() => setEntrar(true)}
-            className="rounded-xl border border-red-600 px-4 py-2 text-sm font-semibold text-red-500 transition-colors hover:bg-red-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
-          >
-            Entrar
-          </button>
-        )}
-        </div>
-      </header>
-        
-      <div className="max-w-2xl mx-auto">
-        <Busca busca={busca} setBusca={setBusca} buscarMoto={buscarMoto}/>
-          
-        {carregando && (
-          <p className="text-center text-gray-400 animate-pulse">Carregando...</p>
-        )}
-
-        {erro && (
-          <p className="text-center text-red-400 bg-red-950/40 border border-red-800 rounded-xl py-3 px-4 mb-4">
-            {erro}
-          </p>
-        )}
-
-        {!carregando && !erro && motos.length === 0 && (
-          <p className="text-center text-gray-500">Nenhum resultado ainda. Faça uma busca acima.</p>
-        )}
-         
-        <MotosResults motos={motos}/>
-
-        </div>
     </div>
+  </header>
+
+  <main className="mx-auto w-full max-w-2xl px-4 pb-10 pt-6 sm:px-6">
+    <Busca busca={busca} setBusca={setBusca} buscarMoto={buscarMoto} />
+
+    {carregando && (
+      <p className="py-4 text-center text-gray-400 animate-pulse">Carregando...</p>
+    )}
+
+    {erro && (
+      <p role="alert" className="mb-4 rounded-xl border border-red-800 bg-red-950/40 px-4 py-3 text-center text-red-400">
+        {erro}
+      </p>
+    )}
+
+    {!carregando && !erro && motos.length === 0 && (
+      <p className="py-4 text-center text-gray-500">Nenhum resultado ainda. Faça uma busca acima.</p>
+    )}
+
+    <MotosResults motos={motos} />
+  </main>
+</div>
   )
 }
 

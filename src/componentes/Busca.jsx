@@ -1,6 +1,6 @@
 function Busca({setBusca, buscarMoto, busca,}){
     return(
-         <div>
+         <div className="scale-90 xl:scale-100">
 
         <h1 className="text-4xl font-bold text-center text-white mb-1 tracking-tight">
           🏍️ Busca de <span className="text-red-500">Motos</span>

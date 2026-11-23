@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { X, Bike, UserRound, Mail, LockKeyhole, Eye, EyeOff } from 'lucide-react'
 
 const campo =
-  'w-full rounded-xl border border-white/[0.07] bg-[#1e2133] py-3 pl-10 text-sm text-[#f0f0f5] outline-none transition-all placeholder:text-[#8a8fa8]/70 hover:border-white/[0.12] focus:border-[#e53e3e]/60 focus:ring-2 focus:ring-[#e53e3e]/10'
+  'w-full rounded-xl border border-white/[0.07] bg-[#1e2133] py-3 pl-10 text-base sm:text-sm text-[#f0f0f5] outline-none transition-all placeholder:text-[#8a8fa8]/70 hover:border-white/[0.12] focus:border-[#e53e3e]/60 focus:ring-2 focus:ring-[#e53e3e]/10'
 
 const abaBase = 'rounded-lg px-4 py-2.5 text-sm transition-all'
 const abaAtiva = 'bg-[#e53e3e] font-semibold text-white shadow-[0_5px_18px_rgba(229,62,62,0.25)]'
@@ -30,13 +30,14 @@ function ModalLogin({
     ${entrar ? 'visible opacity-100' : 'invisible opacity-0'}`}
 >
   <div
-    role="dialog"
-    aria-modal="true"
-    onClick={(e) => e.stopPropagation()}
-    className={`w-full max-w-md overflow-hidden rounded-2xl border border-white/[0.07] bg-[#161927]
-      shadow-[0_28px_90px_rgba(0,0,0,0.58)] transition-all duration-300
-      ${entrar ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-4 scale-95 opacity-0'}`}
-  >
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="titulo-login"
+  onClick={(e) => e.stopPropagation()}
+  className={`max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto overflow-x-hidden overscroll-contain rounded-2xl border border-white/[0.07] bg-[#161927]
+    shadow-[0_28px_90px_rgba(0,0,0,0.58)] transition-all duration-300
+    ${entrar ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-4 scale-95 opacity-0'}`}
+>
 
     {/* Cabeçalho */}
     <div className="relative border-b border-white/[0.07] px-6 pb-5 pt-6">
@@ -44,7 +45,7 @@ function ModalLogin({
           <button
             type="button"
             aria-label="Fechar modal"
-            className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-lg text-[#8a8fa8] transition-colors hover:bg-[#1e2133] hover:text-white"
+            className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-lg text-[#8a8fa8] transition-colors hover:bg-[#1e2133] hover:text-white sm:right-4 sm:top-4 sm:h-8 sm:w-8"
             onClick={() => setEntrar(false)}
           >
             <X size={17} />
@@ -148,7 +149,7 @@ function ModalLogin({
                 type="button"
                 onClick={() => setMostrarSenha((atual) => !atual)}
                 aria-label={mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'}
-                className="absolute right-3 top-1/2 flex -translate-y-1/2 items-center justify-center rounded-md p-1 text-[#8a8fa8] transition-colors hover:bg-white/[0.05] hover:text-white"
+               className="absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md text-[#8a8fa8] transition-colors hover:bg-white/[0.05] hover:text-white"
               >
                 {mostrarSenha ? <EyeOff size={15} /> : <Eye size={15} />}
               </button>
@@ -163,22 +164,16 @@ function ModalLogin({
           )}
 
           {/* Botões */}
-          <div className="flex items-center justify-end gap-3 pt-2">
-            <button
-              type="button"
-              onClick={() => setEntrar(false)}
-              className="rounded-xl border border-white/[0.07] bg-white/[0.04] px-5 py-3 text-sm font-medium text-[#f0f0f5] transition-all hover:border-white/[0.12] hover:bg-white/[0.08] active:scale-[0.98]"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              disabled={carregando}
-              className="rounded-xl bg-[#e53e3e] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(229,62,62,0.22)] transition-all hover:bg-[#ef4b4b] hover:shadow-[0_12px_35px_rgba(229,62,62,0.3)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {carregando ? 'Aguarde...' : 'Confirmar'}
-            </button>
-          </div>
+        <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:items-center sm:justify-end">
+  <button type="button" onClick={() => setEntrar(false)}
+    className="w-full rounded-xl border border-white/[0.07] bg-white/[0.04] px-5 py-3 text-sm font-medium text-[#f0f0f5] transition-all hover:border-white/[0.12] hover:bg-white/[0.08] active:scale-[0.98] sm:w-auto">
+    Cancelar
+  </button>
+  <button type="submit" disabled={carregando}
+    className="w-full rounded-xl bg-[#e53e3e] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(229,62,62,0.22)] transition-all hover:bg-[#ef4b4b] hover:shadow-[0_12px_35px_rgba(229,62,62,0.3)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">
+    {carregando ? 'Aguarde...' : 'Confirmar'}
+  </button>
+</div>
         </form>
 
         {/* Rodapé */}
