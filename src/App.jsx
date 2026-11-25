@@ -257,8 +257,8 @@ function App() {
         </div>
 
         {buscando && (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true">
-            {Array.from({ length: 3 }).map((_, i) => <EsqueletoCard key={i} />)}
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2" aria-busy="true">
+            {Array.from({ length: 2}).map((_, i) => <EsqueletoCard key={i} />)}
           </div>
         )}
 
